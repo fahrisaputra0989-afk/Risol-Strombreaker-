@@ -15,7 +15,7 @@ const MENU = [
   { id: 3, name: "Risol Mentai Daging", emoji: "🥩", price: 3000, desc: "daging sapi berkualitas + saus mentai lumer" },
   { id: 4, name: "Risol Mayo Sayur", emoji: "🥦", price: 2500, desc: "saus mayo lumer + sayuran" },
   { id: 5, name: "Risol Ayam Pedas", emoji: "🌶️", price: 3000, desc: "ayam + cabe rawit nendang!" },
-  { id: 6, name: "Risol Mayo Ayam", emoji: "🍗", price: 3500, desc: "ayam + saus mayo gurih" },
+  { id: 6, name: "Risol Mayo Ayam", emoji: "🍗", price: 3000, desc: "ayam + saus mayo gurih" },
   { id: 7, name: "Risol Mayo Sosis", emoji: "🌭", price: 3000, desc: "Sosis lezat + saus mayo Lumer" },
   { id: 8, name: "Risol Mayo Daging", emoji: "🥩", price: 3000, desc: "daging sapi lembut + saus mayo gurih" },
 ];
