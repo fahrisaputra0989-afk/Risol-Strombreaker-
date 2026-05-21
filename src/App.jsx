@@ -174,8 +174,10 @@ export default function App() {
       <header style={{ background:"linear-gradient(135deg,#E67E22,#F39C12,#F4A03A)", position:"sticky", top:0, zIndex:100, boxShadow:"0 4px 20px rgba(230,126,34,.35)" }}>
         <div style={{ maxWidth:580, margin:"0 auto", padding:"14px 20px", display:"flex", alignItems:"center", justifyContent:"space-between" }}>
           <div style={{ cursor:"pointer" }} onClick={() => setPage("menu")}>
-            <div style={{ fontFamily:"'Pacifico',cursive", fontSize:24, color:"#fff", textShadow:"0 2px 8px rgba(0,0,0,.18)" }}>🥐 {TOKO_NAMA}</div>
-            <div style={{ color:"rgba(255,255,255,.85)", fontSize:10, fontWeight:700, letterSpacing:2, textTransform:"uppercase" }}>Homemade · Enak · Murah</div>
+            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+             <img src={LOGO_SRC} alt="Logo" style={{ width: "35px", height: "35px", borderRadius: "50%", objectFit: "cover" }} />
+              <div style={{ fontFamily:"'Pacifico',cursive", fontSize:24, color:"#fff", textShadow:"0 2px 8px rgba(0,0,0,.18)" }}>{TOKO_NAMA}</div>
+               <div style={{ color:"rgba(255,255,255,.85)", fontSize:10, fontWeight:700, letterSpacing:2, textTransform:"uppercase" }}>Homemade · Enak · Murah</div>
           </div>
           <div style={{ display:"flex", gap:8, alignItems:"center" }}>
             {page==="menu" && totalItems>0 && (
