@@ -395,7 +395,7 @@ export default function App() {
               <div className="card" style={{ textAlign:"center", padding:30 }}>
                 <div style={{ fontSize:48, marginBottom:12 }}>🔐</div>
                 <div style={{ fontWeight:800, color:"#4A2C0A", marginBottom:16 }}>Masukkan PIN</div>
-                <input type="password" className="inp" placeholder="PIN 6 digit" maxLength={4}
+                <input type="password" className="inp" placeholder="PIN 6 digit" maxLength={6}
                   value={dashPin} onChange={e=>setDashPin(e.target.value)}
                   style={{ textAlign:"center", fontSize:24, letterSpacing:8, maxWidth:180, margin:"0 auto 16px" }} />
                 <button className="btn btn-primary" style={{ maxWidth:180, margin:"0 auto" }}
