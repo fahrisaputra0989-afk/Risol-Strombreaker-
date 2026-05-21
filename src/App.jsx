@@ -1,13 +1,9 @@
- import { useState, useEffect } from "react"; // ✅ FIX #4: hapus useRef yg gak dipakai
+ import { useState, useEffect } from "react"; 
 import { createClient } from "sb_publishable_MQxyP2LjaUV11-qXDRW3xA_3Qk9a8o7";
 
-// ─── GANTI INI DENGAN CONFIG KAMU ───────────────────────────
 const SUPABASE_URL = "https://lzcqssxryoepwujyszfj.supabase.co";
-// ✅ FIX #1: Ganti dengan anon key JWT dari Supabase Dashboard → Project Settings → API → anon public
-// Formatnya harus panjang, dimulai dengan "eyJ..."
 const SUPABASE_ANON_KEY = "GANTI_DENGAN_ANON_KEY_DARI_SUPABASE_DASHBOARD";
 const TOKO_NAMA = "Risol Strombreaker";
-// ────────────────────────────────────────────────────────────
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -41,7 +37,6 @@ const STATUS_LABEL = {
 const fmtRp   = n => "Rp " + Number(n).toLocaleString("id-ID");
 const fmtDate = s => new Date(s).toLocaleString("id-ID", { dateStyle: "medium", timeStyle: "short" });
 
-// ═══════════════════════════════════════════════════════════════
 export default function App() {
   const [page, setPage]               = useState("menu"); // menu|checkout|confirm|success|dashboard
   const [cart, setCart]               = useState({});
@@ -57,7 +52,6 @@ export default function App() {
   const [dashUnlocked, setDashUnlocked] = useState(false);
   const DASH_PIN = "271127";
 
-  // Cart helpers
   const addItem    = (item) => setCart(c => ({ ...c, [item.id]: (c[item.id] || 0) + 1 }));
   const remItem    = (id)   => setCart(c => { const n = { ...c }; n[id] > 1 ? n[id]-- : delete n[id]; return n; });
   const cartItems  = Object.entries(cart).map(([id, qty]) => ({ ...MENU.find(m => m.id === +id), qty }));
@@ -81,11 +75,9 @@ export default function App() {
     setProofPreview(URL.createObjectURL(file));
   };
 
-  // ── SUBMIT ORDER ─────────────────────────────────────────────
   const submitOrder = async () => {
     setLoading(true);
     try {
-      // 1. Upload bukti bayar ke Supabase Storage (kalau ada)
       let proofUrl = null;
       if (proofFile) {
         const ext  = proofFile.name.split(".").pop();
@@ -98,7 +90,6 @@ export default function App() {
         }
       }
 
-      // 2. Simpan order ke database
       const items = cartItems.map(i => ({ id: i.id, name: i.name, qty: i.qty, price: i.price }));
       const { data: newOrder, error } = await supabase.from("orders").insert([{
         customer_name:    form.name,
@@ -122,7 +113,6 @@ export default function App() {
     }
   };
 
-  // ── LOAD ORDERS (Dashboard) ───────────────────────────────────
   const loadOrders = async () => {
     setLoadingOrders(true);
     const { data } = await supabase.from("orders")
@@ -140,7 +130,6 @@ export default function App() {
 
   const selectedPay = PAYMENT.find(p => p.id === form.payment);
 
-  // ════════════════════════════════════════════════════════════
   return (
     <div style={{ minHeight: "100vh", background: "linear-gradient(160deg,#FFF8EE,#FFF3E0,#FFF9F0)", fontFamily: "'Nunito',sans-serif" }}>
       <style>{`
@@ -174,11 +163,6 @@ export default function App() {
       <header style={{ background: "linear-gradient(135deg,#E67E22,#F39C12,#F4A03A)", position: "sticky", top: 0, zIndex: 100, boxShadow: "0 4px 20px rgba(230,126,34,.35)" }}>
         <div style={{ maxWidth: 580, margin: "0 auto", padding: "14px 20px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ cursor: "pointer", display: "flex", alignItems: "center", gap: "12px" }} onClick={() => setPage("menu")}>
-            {/*
-              ⚠️ GANTI URL DI BAWAH INI dengan link logo wolf Stormbreakers lo!
-              Cara upload: buka postimg.cc atau imgur.com → upload foto wolf → copy link langsung ke gambarnya
-              Pastikan URL-nya diakhiri .jpg atau .png
-            */}
             <img
               src="https://i.postimg.cc/sD41R2yZ/𝐒𝐓𝐑𝐎𝐌𝐁𝐑𝐄𝐀𝐊𝐄𝐑𝐒-20260507-184223.jpg"
               alt="Logo Stormbreakers"
@@ -419,7 +403,6 @@ export default function App() {
               <div className="card" style={{ textAlign: "center", padding: 30 }}>
                 <div style={{ fontSize: 48, marginBottom: 12 }}>🔐</div>
                 <div style={{ fontWeight: 800, color: "#4A2C0A", marginBottom: 16 }}>Masukkan PIN</div>
-                {/* ✅ FIX #2: maxLength diubah dari 4 → 6 biar bisa input PIN 6 digit */}
                 <input type="password" className="inp" placeholder="PIN 6 digit" maxLength={6}
                   value={dashPin} onChange={e => setDashPin(e.target.value)}
                   style={{ textAlign: "center", fontSize: 24, letterSpacing: 8, maxWidth: 180, margin: "0 auto 16px", display: "block" }} />
@@ -462,7 +445,6 @@ export default function App() {
                               <b style={{ color: "#4A2C0A" }}>{o.customer_name}</b>
                               <span style={{ fontSize: 12, color: "#A0856A", marginLeft: 8 }}>#{o.id.slice(-6).toUpperCase()}</span>
                             </div>
-                            {/* ✅ FIX #3: Tidak spread STATUS_LABEL langsung, ambil bg & color secara eksplisit */}
                             <span style={{
                               background: STATUS_LABEL[o.status]?.bg,
                               color: STATUS_LABEL[o.status]?.color,
