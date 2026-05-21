@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { createClient } from "@supabase/supabase-js";
+const LOGO_SRC = "https://i.postimg.cc/sD41R2yZ/𝐒𝐓𝐑𝐎𝐌𝐁𝐑𝐄𝐀𝐊𝐄𝐑𝐒-20260507-184223.jpg";
 
 // ─── GANTI INI DENGAN CONFIG KAMU ───────────────────────────
 const SUPABASE_URL = "https://lzcqssxryoepwujyszfj.supabase.co";
